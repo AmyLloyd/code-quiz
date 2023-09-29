@@ -1,0 +1,95 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  :root {
+    --features: black;
+    --background: white;
+    --focus: hsl(92, 24%, 47%);
+    --highlight: #d9ac3b;
+}
+  
+  body {
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin: 0;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: flex-start;
+    background: var(--background);
+    width: 100%;
+  }
+
+  header {
+    padding: 20px;
+    display: flex;
+    background: rgb(67, 99, 67);
+    background-blend-mode: hard-light;
+    color: var(--features);
+    border-bottom:30px #879274;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items:center;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+
+  .large-font {
+    font-size:3.5em;
+  }
+
+
+  .timer-container {
+    padding: 10px 20px 10px 10px;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-direction: wrap;
+    border: var(--background) 1px solid;
+    border-radius:5px;
+    color: var(--white);
+    background: var(--highlight);
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight:400;
+    justify-content:space-between;
+
+  }
+  
+
+  span {
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight:500;
+    color:red;
+    font-stretch: semi-expanded;
+  }
+ 
+
+  .question-container {
+    background: var(--focus);
+    color:var(--silver);
+    width: 50%;
+  }
+  .button-styling {
+    background:var(--highlight);
+    color: var(--white);
+    border: var(--background) 1px solid;
+    border-radius:5px;
+    padding: 20px 10px 20px 10px;
+    font-family: Cambria Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 2em;
+  }
+
+  #timer {
+    display: flex;
+    padding: 5px 10px 5px 10px;
+    font-size: 1.5em;
+  }
+
+
+  #counter {
+    display: flex;
+    padding: 5px 10px 5px 10px;
+    font-size: 3em;
+
+  }
