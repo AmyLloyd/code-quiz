@@ -26,8 +26,6 @@
     padding: 20px;
     display: flex;
     background: var(--focus);
-    background-blend-mode: hard-light;
-    color: var(--features);
     border-bottom:30px #879274;
     flex-direction: row;
     justify-content: space-between;
@@ -69,6 +67,7 @@
   .button-styling {
     background:var(--highlight);
     color: var(--white);
+    cursor:pointer;
     border: var(--background) 1px solid;
     border-radius:5px;
     padding: 20px 10px 20px 10px;
@@ -98,7 +97,7 @@
     justify-content:space-evenly;
     border: var(--lightfocus) 2px solid;
     width:50%;
-    margin:auto;
+    margin: 20px auto;
   }
 
   h1, h2 {
@@ -114,4 +113,10 @@
 
     padding: 20px;
     margin: 14px;
+  }
+
+  #innerHTML {
+    display:none;
+    position: relative;
+    top: 25px;
   }
