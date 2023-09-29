@@ -5,8 +5,9 @@
   :root {
     --features: black;
     --background: white;
-    --focus: hsl(92, 24%, 47%);
+    --focus:rgb(67, 99, 67) ;
     --highlight: #d9ac3b;
+    --lightfocus: hsl(92, 24%, 47%);
 }
   
   body {
@@ -24,7 +25,7 @@
   header {
     padding: 20px;
     display: flex;
-    background: rgb(67, 99, 67);
+    background: var(--focus);
     background-blend-mode: hard-light;
     color: var(--features);
     border-bottom:30px #879274;
@@ -65,17 +66,13 @@
   }
  
 
-  .question-container {
-    background: var(--focus);
-    color:var(--silver);
-    width: 50%;
-  }
   .button-styling {
     background:var(--highlight);
     color: var(--white);
     border: var(--background) 1px solid;
     border-radius:5px;
     padding: 20px 10px 20px 10px;
+    margin: 20px 5px 20px 5px;
     font-family: Cambria Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 2em;
   }
@@ -92,4 +89,29 @@
     padding: 5px 10px 5px 10px;
     font-size: 3em;
 
+  }
+
+  .container {
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:space-evenly;
+    border: var(--lightfocus) 2px solid;
+    width:50%;
+    margin:auto;
+  }
+
+  h1, h2 {
+    font-size: 1.5em;
+    padding-top: 2em;
+    padding-bottom: 20px;
+    display:flex;
+  }
+
+  .choice {
+    background-color: var(--lightfocus);
+    border:var(--highlight) 2px solid;
+
+    padding: 20px;
+    margin: 14px;
   }
