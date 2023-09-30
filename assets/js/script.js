@@ -9,11 +9,11 @@ window.addEventListener("load", function() {
 
 //Create variables for what appears at innerHTML
 var questionContent = {
-    question: "What is the meaning of the method .split?",
-    choice1: "Split the function in two.",
-    choice2: "Split the array into individual parts or characters.",
-    choice3: "Split the array into halves.",
-    answer: "Split the array into individual parts or characters.",
+    question: "What is the meaning of the method .split?", "What is .include?", "What is .splice?"
+    choice1: "Split the function in two.", "Looks for the value within the array. True if present.", "Cuts an array in helf and stores the values in local storage.",
+    choice2: "Split the array into individual parts or characters.", "Used to push another value into an array", "Cuts a series of values out of the array using the defined parameters.",
+    choice3: "Split the array into halves.", "Looks for a character within an array", "An icecream you buy from the shop.",
+    answer: "Split the array into individual parts or characters.", "Looks for the value within the array. True if present.", "Cuts a series of values out of the array using the defined parameters.",
 }
 
 var highScores = [];
