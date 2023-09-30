@@ -98,7 +98,8 @@
     align-items:center;
     justify-content:space-evenly;
     border: var(--lightfocus) 2px solid;
-    width:50%;
+    border-radius: 5px;
+    width:70%;
     margin: 20px auto;
   }
 
@@ -112,9 +113,11 @@
   .choice {
     background-color: var(--lightfocus);
     border:var(--highlight) 2px solid;
-
+    border-radius:5px;
+    cursor:pointer;
     padding: 20px;
     margin: 14px;
+    width: 50%;
   }
 
   #innerHTML {
@@ -127,7 +130,11 @@
   }
   
   #question-set {
-    style: hidden;
     display: flex;
     flex-direction: column;
+  }
+
+  #check-answer {
+    padding: 20px 10px;
+    border-top: 1px solid var(--lightfocus);
   }
