@@ -65,6 +65,8 @@
  
 
   .button-styling {
+    display: flex;
+    flex-wrap: wrap;
     background:var(--highlight);
     color: var(--white);
     cursor:pointer;
@@ -116,7 +118,16 @@
   }
 
   #innerHTML {
-    display:none;
     position: relative;
     top: 25px;
+  }
+
+  #welcome-screen {
+    display:flex;
+  }
+  
+  #question-set {
+    style: hidden;
+    display: flex;
+    flex-direction: column;
   }

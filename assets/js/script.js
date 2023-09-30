@@ -1,30 +1,42 @@
-var questionSetA = {
-    question1: "What is the meaning of .trim?",
-    choice1: "Cut the code from the page.",
-    choice2: "Remove the white space after the characters.",
-    answer: "Remove the white space after the characters.",
-}
-
-var questionSetB = {
+//Create variables for what appears at innerHTML
+var questionSet = {
     question1: "What is the meanign of .split?",
     choice1: "Split the function in two.",
     choice2: "Split the array into individual parts or characters.",
     answer: "Split the array into individual parts or characters.",
 }
-var startButton = document.getElementById("start-button");
+
+var highScores = [];
 
 var welcomeScreen = document.getElementById("welcome-screen");
 console.log(welcomeScreen);
+var questionSet = document.getElementById("question-set");
 
+//Variable for startButton
+var startButton = document.getElementById("start-button");
+
+//variable for questionSet so that it can be inputed by DOM
+var questionSet = document.createElement("div");
+questionSet.innerHTML = "This is where this is inserted";
+document.getElementById("innerHTML").appendChild(questionSet);
+
+
+//event listener to activate function
 startButton.addEventListener("click", function(event) {
     event.preventDefault();
     console.log("start button is working");
-    startButton.disabled = true; 
+    startButton.disabled = true;
+    welcomeScreen.style.display = "none";
+    questionSet.style.visibility = "visible";
+
 //works!
 })
 
-var innerHTML =document.getElementById("innerHTML");
-console.log(innerHTML);
+//When the page loads questionSet is invisible
+
+
+
+
 
 
 // GIVEN I am taking a code quiz
