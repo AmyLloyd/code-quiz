@@ -4,7 +4,7 @@ var questionSet = document.getElementById("question-set");
 //Tutor: Would like Questionset hidden at load
 window.addEventListener("load", function() {
     questionSet.style.visibility = "hidden";
-    console.log("Check");
+    answer.style.visibility = "hidden";
 });     
 
 //Create variables for what appears at innerHTML
@@ -15,20 +15,13 @@ var questionContent = {
     choice3: "Split the array into halves.",
     answer: "Split the array into individual parts or characters.",
 }
-console.log(questionContent.question1);
+
 var highScores = [];
 
 var welcomeScreen = document.getElementById("welcome-screen");
-console.log(welcomeScreen);
-
 
 //Variable for startButton
 var startButton = document.getElementById("start-button");
-
-//variable for questionSet so that it can be inputed by DOM
-var questionSet = document.createElement("div");
-questionSet.innerHTML = "This is where this is inserted";
-document.getElementById("innerHTML").appendChild(questionSet);
 
 //Write questionContent data to page
 var choice1 = document.getElementById("option-1");
@@ -42,41 +35,30 @@ choice3.textContent = questionContent.choice3;
 questionHeading.textContent = questionContent.question;
 answer.textContent = questionContent.answer;
 
-console.log(choice1.textContent);
-
-//event listener to activate function
+//event listener to activate function WORKS!
 startButton.addEventListener("click", function(event) {
     event.preventDefault();
     console.log("start button is working");
     startButton.disabled = true;
     welcomeScreen.style.display = "none";
     questionSet.style.visibility = "visible";
-
-//works!
 })
 
-var choiceList = document.querySelector(".choice");
-console.log(choiceList);
+var choiceList = document.getElementById("choice-list");
 
-function checkAnswer() {
-    console.log("working");
-    if (choice1.textContent === questionContent.answer) {
-        console.log("correct");
+//event listener to activate pressing answer - WORKS!
+choiceList.addEventListener("click", function(event) {
+    var clickedEl = event.target;
+    if (clickedEl.textContent === questionContent.answer) {
+        answer.style.visibility = "visible";
+        answer.textContent = "That's right! " + questionContent.answer;
     } else {
-        console.log("wrong, try again");
+        answer.style.visibility = "visible";
+        answer.textContent = "Study harder! Try again or you will fail!";
     }
-    return;
-}
+});
+    
 
-checkAnswer();
-
-//event listener to activate pressing answer
-// choice1.addEventListener("click", checkAnswer()) {
-//     if (choice1.value === questionContent.answer.value) {
-//         console.log("choice1");
-//         answer.style.visibility = "visible";
-//     }
-// }
 
 
 
