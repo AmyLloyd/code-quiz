@@ -15,7 +15,6 @@ var questionContent = {
     choice3: ["Split the array into halves.", "Looks for a character within an array", "An icecream you buy from the shop."],
     answer: ["Split the array into individual parts or characters.", "Looks for the value within the array. True if present.", "Cuts a series of values out of the array using the defined parameters."],
 }
-console.log(questionContent.question[0]);
 
 var highScores = [];
 
@@ -33,18 +32,14 @@ var answerTextEl = document.getElementById("check-answer");
 choice1.textContent = questionContent.choice1[0];
 choice2.textContent = questionContent.choice2[0];
 choice3.textContent = questionContent.choice3[0];
-questionHeading.textContent = questionContent.question.shift();
-console.log(questionHeading);
-//questionHeading.textContent = questionContent.question[0];
+questionHeading.textContent = questionContent.question[0];
 answerTextEl.textContent = questionContent.answer[0];
+
+
 
 //event listener to activate function WORKS!
 startButton.addEventListener("click", function(event) {
     event.preventDefault();
-    function renderQuestion() {
-
-    }
-    console.log("start button is working");
     startButton.disabled = true;
     welcomeScreen.style.display = "none";
     questionSet.style.visibility = "visible";
@@ -58,15 +53,14 @@ choiceList.addEventListener("click", function(event) {
     if (clickedEl.textContent === questionContent.answer[0]) {
         answerTextEl.style.visibility = "visible";
         answerTextEl.textContent = "That's right! " + questionContent.answer[0];
-        function renderQuestion() {
-            console.log(questionContent.question[0]);
-        }
-    } else {
-        answerTextEl.style.visibility = "visible";
-        answerTextEl.textContent = "Study harder! Try again or you will fail!";
-    }
-});
+        console.log(questionContent.question[0]);
 
+    }
+    // }) else {
+    //     answerTextEl.style.visibility = "visible";
+    //     answerTextEl.textContent = "Study harder! Try again or you will fail!";
+    // }
+});
 
 
 
