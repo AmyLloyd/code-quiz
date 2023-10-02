@@ -14,7 +14,7 @@
         <div id="timer">20</div>
       </div>
       <div class="large-font">Code <span>Q</span>u<span>i</span>z</div>
-      <button class="button-styling" id="high-scores">High Scores</button>
+      <button class="button-styling" id="high-scores-button">High Scores</button>
     </header>
 
     <main>
@@ -40,10 +40,17 @@
       </section>
       <section>
         <form class="container" id="game-over">
-          <h1>All done! Your final score is <span id="final-score"> # </span>.</h1>
-          <label for="initials">Enter your initials here:</label><br>
-          <input type="text" id="initials">
+          <h1>All done! Your final score is   <span id="final-score"> # </span>.</h1>
+          <label for="initials">Enter your initials here:</label>
+          <input type="text" id="initials" name="initials"><br>
+          <input type="submit" value="Submit">
         </form>
+      </section>
+      <section>
+        <div class="container" id="high-scores-container">
+          <h1>HIGH SCORES</h1>
+          <p id="high-scores"></p>
+        </div>
       </section>
 
 

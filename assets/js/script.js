@@ -1,11 +1,17 @@
 var questionSet = document.getElementById("question-set");
 var gameOverContainer = document.getElementById("game-over");
+var highScoresContainer = document.getElementById("high-scores-container");
+var initialsInput = document.getElementById("initials");
+
+
 
 //Questionset needs to be hidden at load
 window.addEventListener("load", function () {
   questionSet.style.visibility = "hidden";
   answerTextEl.style.visibility = "hidden";
   gameOverContainer.style.visibility = "hidden";
+  highScoresContainer.style.visibility = "hidden";
+  
 
 });
 //Identifying positions for question data on the page
@@ -67,6 +73,7 @@ startButton.addEventListener("click", function (event) {
   startButton.disabled = true;
   welcomeScreen.style.display = "none";
   questionSet.style.visibility = "visible";
+  highScoresContainer.style.visibility = "hidden";
   renderQuestion();
   setTime();
 });
@@ -81,26 +88,46 @@ function renderQuestion() {
   choice4.textContent = currentQuestion.choices[3];
 }
 
+//Create variable to collect score starting at zero
+var highScores = {
+  score: 0,
+  initials:"",
+};
 
 //add event listener to activate 
 choices.addEventListener("click", function (event) {
   var guess = event.target.textContent;
   if (guess === questions[currentQuestionIndex].answer) {
      console.log("CORRECT!") 
+     highScores.score ++;
   } else {
       console.log("WRONG!!!");
   }
-  
+
   //Add less than length to ensure it knows what to do if index runs out
   currentQuestionIndex++;      
   if (currentQuestionIndex < questions.length) {
   renderQuestion();
-  console.log("less than length");
   } else {
   gameOver ();
   }
 });
 
+initialsInput.addEventListener("submit", function () {
+   highScoresContainer.style.visibility = "visible";
+
+  // gameOverContainer.style.display = "none";
+
+  // console.log(highScores);
+  // localStorage.setItem("highScores", JSON.stringify(highScores));
+  // renderScore();
+  // function renderScore() {
+  //   var savedScores = JSON.parse(localStorage.getItem("highScores"));
+  //   if (savedScores !== null) {
+  //     document.querySelector("#high-scores").textContent = savedScores.name + " scored " + savedScores.score;
+  //   }
+  // }
+})
 
 //Create timer 
 var timeEl = document.getElementById("timer");
@@ -109,9 +136,11 @@ var secondsLeft = 20;
 function gameOver() {
   questionSet.style.display = "none";
   gameOverContainer.style.visibility = "visible";
+
+  //finalScore is the position to put text
+  var finalScore = document.getElementById("final-score");
+  finalScore.textContent = highScores.score;  
 }
-
-
 
 function setTime() {
   var timerInterval = setInterval(function() {
