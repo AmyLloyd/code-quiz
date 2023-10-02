@@ -1,5 +1,6 @@
 var questionSet = document.getElementById("question-set");
-//Tutor: Would like Questionset hidden at load
+
+//Questionset needs to be hidden at load
 window.addEventListener("load", function () {
   questionSet.style.visibility = "hidden";
   answerTextEl.style.visibility = "hidden";
@@ -11,7 +12,12 @@ var choice3 = document.getElementById("option-3");
 var choice4 = document.getElementById("option-4");
 var questionHeading = document.getElementById("question-heading");
 var answerTextEl = document.getElementById("check-answer");
-//Create variables for what appears
+
+//Identify content that will need to be activated or toggled between hidden and visible
+var welcomeScreen = document.getElementById("welcome-screen");
+var startButton = document.getElementById("start-button");
+
+//Create variables for what appears - an array of the question sets
 var questions = [
   {
     title: "Commonly used data types DO NOT include:",
@@ -46,28 +52,12 @@ var questions = [
     answer: "console.log",
   },
 ];
+
 var choices = document.querySelector("#choice-list");
+
+//Tutor support needed to add this currentQuestion array in order to link the array to the textContent
 var currentQuestionIndex = 0;
-function renderQuestion() {
-  var currentQuestion = questions[currentQuestionIndex];
-  questionHeading.textContent = currentQuestion.title;
-  choice1.textContent = currentQuestion.choices[0];
-  choice2.textContent = currentQuestion.choices[1];
-  choice3.textContent = currentQuestion.choices[2];
-  choice4.textContent = currentQuestion.choices[3];
-}
-choices.addEventListener("click", function (e) {
-  var guess = e.target.textContent;
-  if (guess === questions[currentQuestionIndex].answer) {
-    console.log("RIGHT!!!");
-  } else {
-    console.log("WRONG!!!");
-  }
-  currentQuestionIndex++;
-  renderQuestion();
-});
-var welcomeScreen = document.getElementById("welcome-screen");
-var startButton = document.getElementById("start-button");
+
 //event listener to activate function WORKS!
 startButton.addEventListener("click", function (event) {
   event.preventDefault();
@@ -77,6 +67,53 @@ startButton.addEventListener("click", function (event) {
   renderQuestion();
 });
 
+
+function renderQuestion() {
+  var currentQuestion = questions[currentQuestionIndex];
+  questionHeading.textContent = currentQuestion.title;
+  choice1.textContent = currentQuestion.choices[0];
+  choice2.textContent = currentQuestion.choices[1];
+  choice3.textContent = currentQuestion.choices[2];
+  choice4.textContent = currentQuestion.choices[3];
+}
+
+//add event listener to activate 
+choices.addEventListener("click", function (event) {
+  var guess = event.target.textContent;
+  if (guess === questions[currentQuestionIndex].answer) {
+     console.log("CORRECT!") 
+     return
+  } else {
+      console.log("WRONG!!!");
+  }
+  currentQuestionIndex++;
+  
+  renderQuestion();
+});
+
+
+//Create timer 
+var timeEl = document.getElementById("timer");
+var secondsLeft = 20;
+
+function gameOver() {
+  questionSet.style.visibility = "hidden";
+
+}
+]
+
+function setTime() {
+  var timerInterval = setInterval(function() {
+    secondsLeft--;
+    timeEl.textContent = secondsLeft;
+    if (secondsLeft === 0) {
+      clearInterval(timerInterval);
+      gameOver();
+    }
+  }, 1000);
+}
+
+setTime();
 
 
 
