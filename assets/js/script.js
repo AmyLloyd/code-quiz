@@ -1,8 +1,18 @@
 var questionSet = document.getElementById("question-set");
-//Tutor: Would like Questionset hidden at load
+var gameOverContainer = document.getElementById("game-over");
+var highScoresContainer = document.getElementById("high-scores-container");
+var initialsInput = document.getElementById("initials");
+
+
+
+//Questionset needs to be hidden at load
 window.addEventListener("load", function () {
   questionSet.style.visibility = "hidden";
   answerTextEl.style.visibility = "hidden";
+  gameOverContainer.style.visibility = "hidden";
+  highScoresContainer.style.visibility = "hidden";
+  
+
 });
 //Identifying positions for question data on the page
 var choice1 = document.getElementById("option-1");
@@ -11,7 +21,12 @@ var choice3 = document.getElementById("option-3");
 var choice4 = document.getElementById("option-4");
 var questionHeading = document.getElementById("question-heading");
 var answerTextEl = document.getElementById("check-answer");
-//Create variables for what appears
+
+//Identify content that will need to be activated or toggled between hidden and visible
+var welcomeScreen = document.getElementById("welcome-screen");
+var startButton = document.getElementById("start-button");
+
+//Create variables for what appears - an array of the question sets
 var questions = [
   {
     title: "Commonly used data types DO NOT include:",
@@ -46,8 +61,24 @@ var questions = [
     answer: "console.log",
   },
 ];
+
 var choices = document.querySelector("#choice-list");
+
+//Tutor support needed to add this currentQuestion array in order to link the array to the textContent
 var currentQuestionIndex = 0;
+
+//event listener to activate function WORKS!
+startButton.addEventListener("click", function (event) {
+  event.preventDefault();
+  startButton.disabled = true;
+  welcomeScreen.style.display = "none";
+  questionSet.style.visibility = "visible";
+  highScoresContainer.style.visibility = "hidden";
+  renderQuestion();
+  setTime();
+});
+
+
 function renderQuestion() {
   var currentQuestion = questions[currentQuestionIndex];
   questionHeading.textContent = currentQuestion.title;
@@ -56,26 +87,72 @@ function renderQuestion() {
   choice3.textContent = currentQuestion.choices[2];
   choice4.textContent = currentQuestion.choices[3];
 }
-choices.addEventListener("click", function (e) {
-  var guess = e.target.textContent;
+
+//Create variable to collect score starting at zero
+var highScores = {
+  score: 0,
+  initials:"",
+};
+
+//add event listener to activate 
+choices.addEventListener("click", function (event) {
+  var guess = event.target.textContent;
   if (guess === questions[currentQuestionIndex].answer) {
-    console.log("RIGHT!!!");
+     console.log("CORRECT!") 
+     highScores.score ++;
   } else {
-    console.log("WRONG!!!");
+      console.log("WRONG!!!");
   }
-  currentQuestionIndex++;
+
+  //Add less than length to ensure it knows what to do if index runs out
+  currentQuestionIndex++;      
+  if (currentQuestionIndex < questions.length) {
   renderQuestion();
+  } else {
+  gameOver ();
+  }
 });
-var welcomeScreen = document.getElementById("welcome-screen");
-var startButton = document.getElementById("start-button");
-//event listener to activate function WORKS!
-startButton.addEventListener("click", function (event) {
-  event.preventDefault();
-  startButton.disabled = true;
-  welcomeScreen.style.display = "none";
-  questionSet.style.visibility = "visible";
-  renderQuestion();
-});
+
+initialsInput.addEventListener("submit", function () {
+   highScoresContainer.style.visibility = "visible";
+
+  // gameOverContainer.style.display = "none";
+
+  // console.log(highScores);
+  // localStorage.setItem("highScores", JSON.stringify(highScores));
+  // renderScore();
+  // function renderScore() {
+  //   var savedScores = JSON.parse(localStorage.getItem("highScores"));
+  //   if (savedScores !== null) {
+  //     document.querySelector("#high-scores").textContent = savedScores.name + " scored " + savedScores.score;
+  //   }
+  // }
+})
+
+//Create timer 
+var timeEl = document.getElementById("timer");
+var secondsLeft = 20;
+
+function gameOver() {
+  questionSet.style.display = "none";
+  gameOverContainer.style.visibility = "visible";
+
+  //finalScore is the position to put text
+  var finalScore = document.getElementById("final-score");
+  finalScore.textContent = highScores.score;  
+}
+
+function setTime() {
+  var timerInterval = setInterval(function() {
+    secondsLeft--;
+    timeEl.textContent = secondsLeft;
+    if (secondsLeft === 0) {
+      clearInterval(timerInterval);
+      gameOver();
+    } 
+  }, 1000);
+}
+
 
 
 

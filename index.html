@@ -10,11 +10,11 @@
   <body>
     <header>
       <div class="timer-container">
-        <h2 id="timer">Timer</h2>
-        <div id="counter">20</div>
+        <h2>Timer</h2>
+        <div id="timer">20</div>
       </div>
       <div class="large-font">Code <span>Q</span>u<span>i</span>z</div>
-      <button class="button-styling" id="high-scores">High Scores</button>
+      <button class="button-styling" id="high-scores-button">High Scores</button>
     </header>
 
     <main>
@@ -33,8 +33,23 @@
               <button class="choice" id="option-1"></button>
               <button class="choice" id="option-2"></button>
               <button class="choice" id="option-3"></button>
+              <button class="choice" id="option-4"></button>
             </div>
             <div id = "check-answer"></div>           
+        </div>
+      </section>
+      <section>
+        <form class="container" id="game-over">
+          <h1>All done! Your final score is   <span id="final-score"> # </span>.</h1>
+          <label for="initials">Enter your initials here:</label>
+          <input type="text" id="initials" name="initials"><br>
+          <input type="submit" value="Submit">
+        </form>
+      </section>
+      <section>
+        <div class="container" id="high-scores-container">
+          <h1>HIGH SCORES</h1>
+          <p id="high-scores"></p>
         </div>
       </section>
 
