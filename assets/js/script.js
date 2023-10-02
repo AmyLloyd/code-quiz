@@ -1,9 +1,12 @@
 var questionSet = document.getElementById("question-set");
+var gameOverContainer = document.getElementById("game-over");
 
 //Questionset needs to be hidden at load
 window.addEventListener("load", function () {
   questionSet.style.visibility = "hidden";
   answerTextEl.style.visibility = "hidden";
+  gameOverContainer.style.visibility = "hidden";
+
 });
 //Identifying positions for question data on the page
 var choice1 = document.getElementById("option-1");
@@ -65,6 +68,7 @@ startButton.addEventListener("click", function (event) {
   welcomeScreen.style.display = "none";
   questionSet.style.visibility = "visible";
   renderQuestion();
+  setTime();
 });
 
 
@@ -77,18 +81,24 @@ function renderQuestion() {
   choice4.textContent = currentQuestion.choices[3];
 }
 
+
 //add event listener to activate 
 choices.addEventListener("click", function (event) {
   var guess = event.target.textContent;
   if (guess === questions[currentQuestionIndex].answer) {
      console.log("CORRECT!") 
-     return
   } else {
       console.log("WRONG!!!");
   }
-  currentQuestionIndex++;
   
+  //Add less than length to ensure it knows what to do if index runs out
+  currentQuestionIndex++;      
+  if (currentQuestionIndex < questions.length) {
   renderQuestion();
+  console.log("less than length");
+  } else {
+  gameOver ();
+  }
 });
 
 
@@ -97,10 +107,11 @@ var timeEl = document.getElementById("timer");
 var secondsLeft = 20;
 
 function gameOver() {
-  questionSet.style.visibility = "hidden";
-
+  questionSet.style.display = "none";
+  gameOverContainer.style.visibility = "visible";
 }
-]
+
+
 
 function setTime() {
   var timerInterval = setInterval(function() {
@@ -109,11 +120,11 @@ function setTime() {
     if (secondsLeft === 0) {
       clearInterval(timerInterval);
       gameOver();
-    }
+    } 
   }, 1000);
 }
 
-setTime();
+
 
 
 

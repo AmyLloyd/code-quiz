@@ -100,7 +100,7 @@
     border: var(--lightfocus) 2px solid;
     border-radius: 5px;
     width:70%;
-    margin: 20px auto;
+    margin: 40px auto;
   }
 
   h1, h2 {
@@ -143,4 +143,8 @@
     flex-direction: column;
     align-content:center;
     flex-wrap: wrap;
+  }
+  #initials {
+    padding: 10px;
+    margin-bottom: 20px;
   }
