@@ -8,6 +8,7 @@ var welcomeScreen = document.getElementById("welcome-screen");
 var submitBtn = document.getElementById("#submit");
 var startButton = document.getElementById("start-button");
 var choices = document.querySelector("#choice-list");
+var initialsInput = document.getElementById("#initials");
 
 //set original attributes of sections
 gameOverContainer.setAttribute("style", "visibility: hidden;");
@@ -138,7 +139,7 @@ function gameOver() {
 
 //When submit button clicked
 
-submitBtn.addEventListener("submit", function (event) {
+initialsInput.addEventListener("submit", function (event) {
   event.preventDefault();
   //test if submitBtn works using console.log
   console.log("initials written");
