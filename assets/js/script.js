@@ -1,23 +1,23 @@
+//set variables to access sections
 var questionSet = document.getElementById("question-set");
 var gameOverContainer = document.getElementById("game-over");
 var highScoresContainer = document.getElementById("high-scores-container");
-var submitBtn = document.getElementById("#submit");
 var welcomeScreen = document.getElementById("welcome-screen");
 
+//set variables to access buttons including choices buttons
+var submitBtn = document.getElementById("#submit");
+var startButton = document.getElementById("start-button");
+var choices = document.querySelector("#choice-list");
+var initialsInput = document.getElementById("#initials");
 
+//set original attributes of sections
 gameOverContainer.setAttribute("style", "visibility: hidden;");
 highScoresContainer.setAttribute("style", "visibility: hidden;");
 questionSet.setAttribute("style", "visibility: hidden;");
 welcomeScreen.setAttribute("style", "display: flex;");
 
-// //Questionset needs to be hidden at load
-// window.addEventListener("load", function () {
-//   questionSet.style.visibility = "hidden";
-//   answerTextEl.style.visibility = "hidden";
-//   gameOverContainer.style.visibility = "hidden";
-//   highScoresContainer.style.visibility = "hidden";
-// });
-//Identifying positions for question data on the page
+
+//Identifying positions for question data in questionSet section
 var choice1 = document.getElementById("option-1");
 var choice2 = document.getElementById("option-2");
 var choice3 = document.getElementById("option-3");
@@ -25,11 +25,7 @@ var choice4 = document.getElementById("option-4");
 var questionHeading = document.getElementById("question-heading");
 var answerTextEl = document.getElementById("check-answer");
 
-//Identify content that will need to be activated or toggled between hidden and visible
-
-var startButton = document.getElementById("start-button");
-
-//Create variables for what appears - an array of the question sets
+//Create variables for questions that appear - an array of the question sets
 var questions = [
   {
     title: "Commonly used data types DO NOT include:",
@@ -65,12 +61,11 @@ var questions = [
   },
 ];
 
-var choices = document.querySelector("#choice-list");
 
 //Tutor support needed to add this currentQuestion array in order to link the array to the textContent
 var currentQuestionIndex = 0;
 
-//event listener to activate function WORKS!
+//event listener to activate function on startBtn WORKS!
 startButton.addEventListener("click", function (event) {
   event.preventDefault();
   startButton.disabled = true;
@@ -97,7 +92,7 @@ var highScores = {
   initials:[""],
 };
 
-//add event listener to activate 
+//add event listener to activate choices
 choices.addEventListener("click", function (event) {
   var guess = event.target.textContent;
   if (guess === questions[currentQuestionIndex].answer) {
@@ -144,11 +139,12 @@ function gameOver() {
 
 //When submit button clicked
 
-submitBtn.addEventListener("submit", function (event) {
+initialsInput.addEventListener("submit", function (event) {
   event.preventDefault();
+  //test if submitBtn works using console.log
   console.log("initials written");
   // show highscores screen
-  // gameOverContainer.setAttribute("style", "display: none;");
- // highScoresContainer.setAttribute("style", "visibility: visible;");
+    gameOverContainer.setAttribute("style", "display: none;");
+    highScoresContainer.setAttribute("style", "visibility: visible;");
   }
 );
