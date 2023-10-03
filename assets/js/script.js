@@ -8,7 +8,7 @@ var welcomeScreen = document.getElementById("welcome-screen");
 var submitBtn = document.getElementById("#submit");
 var startButton = document.getElementById("start-button");
 var choices = document.querySelector("#choice-list");
-var initialsInput = document.getElementById("#initials");
+var initialsInput = document.getElementById("initials");
 
 //set original attributes of sections
 gameOverContainer.setAttribute("style", "visibility: hidden;");
