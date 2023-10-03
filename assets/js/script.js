@@ -1,19 +1,22 @@
 var questionSet = document.getElementById("question-set");
 var gameOverContainer = document.getElementById("game-over");
 var highScoresContainer = document.getElementById("high-scores-container");
-var initialsInput = document.getElementById("initials");
+var submitBtn = document.getElementById("#submit");
+var welcomeScreen = document.getElementById("welcome-screen");
 
 
+gameOverContainer.setAttribute("style", "visibility: hidden;");
+highScoresContainer.setAttribute("style", "visibility: hidden;");
+questionSet.setAttribute("style", "visibility: hidden;");
+welcomeScreen.setAttribute("style", "display: flex;");
 
-//Questionset needs to be hidden at load
-window.addEventListener("load", function () {
-  questionSet.style.visibility = "hidden";
-  answerTextEl.style.visibility = "hidden";
-  gameOverContainer.style.visibility = "hidden";
-  highScoresContainer.style.visibility = "hidden";
-  
-
-});
+// //Questionset needs to be hidden at load
+// window.addEventListener("load", function () {
+//   questionSet.style.visibility = "hidden";
+//   answerTextEl.style.visibility = "hidden";
+//   gameOverContainer.style.visibility = "hidden";
+//   highScoresContainer.style.visibility = "hidden";
+// });
 //Identifying positions for question data on the page
 var choice1 = document.getElementById("option-1");
 var choice2 = document.getElementById("option-2");
@@ -23,7 +26,7 @@ var questionHeading = document.getElementById("question-heading");
 var answerTextEl = document.getElementById("check-answer");
 
 //Identify content that will need to be activated or toggled between hidden and visible
-var welcomeScreen = document.getElementById("welcome-screen");
+
 var startButton = document.getElementById("start-button");
 
 //Create variables for what appears - an array of the question sets
@@ -73,9 +76,9 @@ startButton.addEventListener("click", function (event) {
   startButton.disabled = true;
   welcomeScreen.style.display = "none";
   questionSet.style.visibility = "visible";
-  highScoresContainer.style.visibility = "hidden";
+  
   renderQuestion();
-  setTime();
+  //setTime();
 });
 
 
@@ -91,7 +94,7 @@ function renderQuestion() {
 //Create variable to collect score starting at zero
 var highScores = {
   score: 0,
-  initials:"",
+  initials:[""],
 };
 
 //add event listener to activate 
@@ -113,22 +116,6 @@ choices.addEventListener("click", function (event) {
   }
 });
 
-initialsInput.addEventListener("submit", function () {
-   highScoresContainer.style.visibility = "visible";
-
-  // gameOverContainer.style.display = "none";
-
-  // console.log(highScores);
-  // localStorage.setItem("highScores", JSON.stringify(highScores));
-  // renderScore();
-  // function renderScore() {
-  //   var savedScores = JSON.parse(localStorage.getItem("highScores"));
-  //   if (savedScores !== null) {
-  //     document.querySelector("#high-scores").textContent = savedScores.name + " scored " + savedScores.score;
-  //   }
-  // }
-})
-
 //Create timer 
 var timeEl = document.getElementById("timer");
 var secondsLeft = 20;
@@ -142,30 +129,26 @@ function gameOver() {
   finalScore.textContent = highScores.score;  
 }
 
-function setTime() {
-  var timerInterval = setInterval(function() {
-    secondsLeft--;
-    timeEl.textContent = secondsLeft;
-    if (secondsLeft === 0) {
-      clearInterval(timerInterval);
-      gameOver();
-    } 
-  }, 1000);
-}
 
+//Add timer to count down by ones
+// function setTime() {
+//   var timerInterval = setInterval(function() {
+//     secondsLeft--;
+//     timeEl.textContent = secondsLeft;
+//     if (secondsLeft === 0) {
+//       clearInterval(timerInterval);
+//       gameOver();
+//     } 
+//   }, 1000);
+// }
 
+//When submit button clicked
 
-
-
-
-// GIVEN I am taking a code quiz
-// WHEN I click the start button
-// THEN a timer starts and I am presented with a question
-// WHEN I answer a question
-// THEN I am presented with another question
-// WHEN I answer a question incorrectly
-// THEN time is subtracted from the clock
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
-// WHEN the game is over
-// THEN I can save my initials and my score
+submitBtn.addEventListener("submit", function (event) {
+  event.preventDefault();
+  console.log("initials written");
+  // show highscores screen
+  // gameOverContainer.setAttribute("style", "display: none;");
+ // highScoresContainer.setAttribute("style", "visibility: visible;");
+  }
+);
