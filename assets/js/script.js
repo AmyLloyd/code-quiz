@@ -9,6 +9,7 @@ var saveHighScore = document.getElementById("save-high-score");
 var startButton = document.getElementById("start-button");
 var choices = document.querySelector("#choice-list");
 var initialsInput = document.getElementById("initials-input");
+var highScoresLink = document.querySelector("#high-scores-button");
 
 
 //set original attributes of sections
@@ -97,10 +98,14 @@ choices.addEventListener("click", function (event) {
      console.log("CORRECT!") 
      score ++;
      console.log(score);
+     answerTextEl.textContent = "CORRECT!"
   } else {
       console.log("WRONG!!!");
-  }
-
+      answerTextEl.textContent = "WRONG!"
+      if (secondsLeft > 10) {
+      secondsLeft = secondsLeft - 10;
+      }
+  }  
   //Add less than length to ensure it knows what to do if index runs out
   currentQuestionIndex++;      
   if (currentQuestionIndex < questions.length) {
@@ -112,12 +117,12 @@ choices.addEventListener("click", function (event) {
 
 //Create timer 
 var timeEl = document.getElementById("timer");
-var secondsLeft = 20;
+var secondsLeft = 70;
 
 function gameOver() {
   questionSet.style.display = "none";
   gameOverContainer.style.visibility = "visible";
-
+  
   //finalScore is the position to put text
   var finalScore = document.getElementById("final-score");
   finalScore.textContent = score;  
@@ -129,7 +134,7 @@ function setTime() {
   var timerInterval = setInterval(function() {
     secondsLeft--;
     timeEl.textContent = secondsLeft;
-    if (secondsLeft === 0) {
+    if (secondsLeft === 0 || gameOverContainer.style.visibility === "visible"){
       clearInterval(timerInterval);
       gameOver();
     } 
@@ -193,5 +198,15 @@ saveHighScore.addEventListener("click", function (event) {
    // show highscores screen
   gameOverContainer.setAttribute("style", "display: none;");
   highScoresContainer.setAttribute("style", "visibility: visible;");
+  //disable high scores button to prevent clicking and further activation 
+  highScoresLink.disabled = true;
 });
 
+highScoresLink.addEventListener("click", function() {
+  highScoresLink.disabled = true;
+  questionSet.style.display = "none";
+  gameOverContainer.style.display = "none";
+  highScoresContainer.setAttribute("style", "visibility: visible;");
+  welcomeScreen.setAttribute("style", "display: none;");
+  renderHighScoreBoard();
+});
