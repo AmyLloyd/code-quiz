@@ -8,7 +8,8 @@ var welcomeScreen = document.getElementById("welcome-screen");
 var saveHighScore = document.getElementById("save-high-score");
 var startButton = document.getElementById("start-button");
 var choices = document.querySelector("#choice-list");
-var initialsInput = document.getElementById("initials");
+var initialsInput = document.getElementById("initials-input");
+var highScoresLink = document.querySelector("#high-scores-button");
 
 
 //set original attributes of sections
@@ -74,7 +75,7 @@ startButton.addEventListener("click", function (event) {
   questionSet.style.visibility = "visible";
   
   renderQuestion();
-  //setTime();
+  setTime();
 });
 
 
@@ -97,10 +98,14 @@ choices.addEventListener("click", function (event) {
      console.log("CORRECT!") 
      score ++;
      console.log(score);
+     answerTextEl.textContent = "CORRECT!"
   } else {
       console.log("WRONG!!!");
-  }
-
+      answerTextEl.textContent = "WRONG!"
+      if (secondsLeft > 10) {
+      secondsLeft = secondsLeft - 10;
+      }
+  }  
   //Add less than length to ensure it knows what to do if index runs out
   currentQuestionIndex++;      
   if (currentQuestionIndex < questions.length) {
@@ -112,12 +117,12 @@ choices.addEventListener("click", function (event) {
 
 //Create timer 
 var timeEl = document.getElementById("timer");
-var secondsLeft = 20;
+var secondsLeft = 70;
 
 function gameOver() {
   questionSet.style.display = "none";
   gameOverContainer.style.visibility = "visible";
-
+  
   //finalScore is the position to put text
   var finalScore = document.getElementById("final-score");
   finalScore.textContent = score;  
@@ -125,28 +130,83 @@ function gameOver() {
 
 
 //Add timer to count down by ones
-// function setTime() {
-//   var timerInterval = setInterval(function() {
-//     secondsLeft--;
-//     timeEl.textContent = secondsLeft;
-//     if (secondsLeft === 0) {
-//       clearInterval(timerInterval);
-//       gameOver();
-//     } 
-//   }, 1000);
-// }
+function setTime() {
+  var timerInterval = setInterval(function() {
+    secondsLeft--;
+    timeEl.textContent = secondsLeft;
+    if (secondsLeft === 0 || gameOverContainer.style.visibility === "visible"){
+      clearInterval(timerInterval);
+      gameOver();
+    } 
+  }, 1000);
+}
 
-//When saveHighScore button clicked
+//Make array to hold high scores
 var highScores = [];
+
+//store highScores
+function storeHighScore() {
+  //collect player initials data from input
+  var uncasedPlayerInitials = initialsInput.value
+    //convert to upper case
+  var playerInitials = uncasedPlayerInitials.toUpperCase();
+  var playerData = {
+    initials: "",
+    score: 0
+  };
+  playerData.initials = playerInitials;
+  playerData.score = score;  
+
+  if (highScores !== null && playerData.score > highScores) {
+    highScores.push(playerData);
+    console.log(highScores);
+  } else {
+    console.log("try again");
+    return;
+  }
+  localStorage.setItem("playerData", JSON.stringify(playerData));
+  //clear input 
+  initialsInput.value = ' ';
+}
+
+//render data to high score board screen
+
+function renderHighScoreBoard() {
+  var storedScores = JSON.parse(localStorage.getItem("playerData"));
+  //create array to hold parsed items
+  console.log(storedScores);
+  var returnedScores = [];
+  returnedScores.push(storedScores);
+  //add validation that storedScore is not empty  
+  if (returnedScores !== null) {
+    //create the new element using tag
+    var scoreTag = document.createElement("li");
+    //add text to new element
+    scoreTag.textContent = storedScores.initials + "_________" + storedScores.score;
+    //identify position to append
+    var scoreBoard = document.getElementById("high-scores");
+    //append child
+    scoreBoard.appendChild(scoreTag);
+  }
+}
 
 saveHighScore.addEventListener("click", function (event) {
   event.preventDefault();
-  //test if saveHighScore works using console.log
-  console.log("initials written");
-  // show highscores screen
+    //test if saveHighScore works using console.log
+  storeHighScore();
+  renderHighScoreBoard();
+   // show highscores screen
   gameOverContainer.setAttribute("style", "display: none;");
   highScoresContainer.setAttribute("style", "visibility: visible;");
-  
+  //disable high scores button to prevent clicking and further activation 
+  highScoresLink.disabled = true;
+});
 
-  }
-);
+highScoresLink.addEventListener("click", function() {
+  highScoresLink.disabled = true;
+  questionSet.style.display = "none";
+  gameOverContainer.style.display = "none";
+  highScoresContainer.setAttribute("style", "visibility: visible;");
+  welcomeScreen.setAttribute("style", "display: none;");
+  renderHighScoreBoard();
+});

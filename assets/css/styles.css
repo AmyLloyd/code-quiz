@@ -108,8 +108,16 @@
     padding-top: 2em;
     padding-bottom: 20px;
     display:flex;
+    text-align: center;
   }
 
+  p {
+    font-size: 1em;
+    padding-top: 2px;
+    padding-bottom: 10px;
+    padding-right: 30px:
+    margin: 10px;
+  }
   .choice {
     background-color: var(--lightfocus);
     border:var(--highlight) 2px solid;
@@ -117,7 +125,7 @@
     cursor:pointer;
     padding: 20px;
     margin: 14px;
-    width: 50%;
+    width: 150%;
   }
 
   #innerHTML {
@@ -152,6 +160,7 @@
   #high-scores-container {
     display: flex;
     flex-direction: column;
+    padding: 20px;
   }
 
   #game-over {
