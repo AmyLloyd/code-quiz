@@ -5,10 +5,11 @@ var highScoresContainer = document.getElementById("high-scores-container");
 var welcomeScreen = document.getElementById("welcome-screen");
 
 //set variables to access buttons including choices buttons
-var submitBtn = document.getElementById("#submit");
+var saveHighScore = document.getElementById("save-high-score");
 var startButton = document.getElementById("start-button");
 var choices = document.querySelector("#choice-list");
 var initialsInput = document.getElementById("initials");
+
 
 //set original attributes of sections
 gameOverContainer.setAttribute("style", "visibility: hidden;");
@@ -89,7 +90,7 @@ function renderQuestion() {
 //Create variable to collect score starting at zero
 var highScores = {
   score: 0,
-  initials:[""],
+  initials:"",
 };
 
 //add event listener to activate choices
@@ -137,11 +138,11 @@ function gameOver() {
 //   }, 1000);
 // }
 
-//When submit button clicked
+//When saveHighScore button clicked
 
-initialsInput.addEventListener("submit", function (event) {
+saveHighScore.addEventListener("click", function (event) {
   event.preventDefault();
-  //test if submitBtn works using console.log
+  //test if saveHighScore works using console.log
   console.log("initials written");
   // show highscores screen
     gameOverContainer.setAttribute("style", "display: none;");
