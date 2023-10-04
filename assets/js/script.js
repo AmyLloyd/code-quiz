@@ -8,7 +8,7 @@ var welcomeScreen = document.getElementById("welcome-screen");
 var saveHighScore = document.getElementById("save-high-score");
 var startButton = document.getElementById("start-button");
 var choices = document.querySelector("#choice-list");
-var initialsInput = document.getElementById("initials");
+var initialsInput = document.getElementById("initials-input");
 
 
 //set original attributes of sections
@@ -74,7 +74,7 @@ startButton.addEventListener("click", function (event) {
   questionSet.style.visibility = "visible";
   
   renderQuestion();
-  //setTime();
+  setTime();
 });
 
 
@@ -125,28 +125,70 @@ function gameOver() {
 
 
 //Add timer to count down by ones
-// function setTime() {
-//   var timerInterval = setInterval(function() {
-//     secondsLeft--;
-//     timeEl.textContent = secondsLeft;
-//     if (secondsLeft === 0) {
-//       clearInterval(timerInterval);
-//       gameOver();
-//     } 
-//   }, 1000);
-// }
+function setTime() {
+  var timerInterval = setInterval(function() {
+    secondsLeft--;
+    timeEl.textContent = secondsLeft;
+    if (secondsLeft === 0) {
+      clearInterval(timerInterval);
+      gameOver();
+    } 
+  }, 1000);
+}
 
-//When saveHighScore button clicked
+//Make array to hold high scores
 var highScores = [];
+
+//store highScores
+function storeHighScore() {
+  //collect player initials data from input
+  var uncasedPlayerInitials = initialsInput.value
+    //convert to upper case
+  var playerInitials = uncasedPlayerInitials.toUpperCase();
+  var playerData = {
+    initials: "",
+    score: 0
+  };
+  playerData.initials = playerInitials;
+  playerData.score = score;  
+
+  highScores.push(playerData);
+  console.log("High scores");
+  console.log(playerData.initials + "     " + playerData.score);
+
+  localStorage.setItem("playerData", JSON.stringify(playerData));
+  //clear input 
+  initialsInput.value = ' ';
+}
+
+//render data to high score board screen
+
+function renderHighScoreBoard() {
+  var storedScores = JSON.parse(localStorage.getItem("playerData"));
+  //create array to hold parsed items
+  console.log(storedScores);
+  var returnedScores = [];
+  returnedScores.push(storedScores);
+  //add validation that storedScore is not empty  
+  if (returnedScores !== null) {
+    //create the new element using tag
+    var scoreTag = document.createElement("li");
+    //add text to new element
+    scoreTag.textContent = storedScores.initials + "_________" + storedScores.score;
+    //identify position to append
+    var scoreBoard = document.getElementById("high-scores");
+    //append child
+    scoreBoard.appendChild(scoreTag);
+  }
+}
 
 saveHighScore.addEventListener("click", function (event) {
   event.preventDefault();
-  //test if saveHighScore works using console.log
-  console.log("initials written");
-  // show highscores screen
+    //test if saveHighScore works using console.log
+  storeHighScore();
+  renderHighScoreBoard();
+   // show highscores screen
   gameOverContainer.setAttribute("style", "display: none;");
   highScoresContainer.setAttribute("style", "visibility: visible;");
-  
+});
 
-  }
-);
