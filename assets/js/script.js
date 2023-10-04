@@ -88,17 +88,15 @@ function renderQuestion() {
 }
 
 //Create variable to collect score starting at zero
-var highScores = {
-  score: 0,
-  initials:"",
-};
+var score = 0;
 
 //add event listener to activate choices
 choices.addEventListener("click", function (event) {
   var guess = event.target.textContent;
   if (guess === questions[currentQuestionIndex].answer) {
      console.log("CORRECT!") 
-     highScores.score ++;
+     score ++;
+     console.log(score);
   } else {
       console.log("WRONG!!!");
   }
@@ -122,7 +120,7 @@ function gameOver() {
 
   //finalScore is the position to put text
   var finalScore = document.getElementById("final-score");
-  finalScore.textContent = highScores.score;  
+  finalScore.textContent = score;  
 }
 
 
@@ -139,13 +137,16 @@ function gameOver() {
 // }
 
 //When saveHighScore button clicked
+var highScores = [];
 
 saveHighScore.addEventListener("click", function (event) {
   event.preventDefault();
   //test if saveHighScore works using console.log
   console.log("initials written");
   // show highscores screen
-    gameOverContainer.setAttribute("style", "display: none;");
-    highScoresContainer.setAttribute("style", "visibility: visible;");
+  gameOverContainer.setAttribute("style", "display: none;");
+  highScoresContainer.setAttribute("style", "visibility: visible;");
+  
+
   }
 );
