@@ -152,10 +152,13 @@ function storeHighScore() {
   playerData.initials = playerInitials;
   playerData.score = score;  
 
-  highScores.push(playerData);
-  console.log("High scores");
-  console.log(playerData.initials + "     " + playerData.score);
-
+  if (highScores !== null && playerData.score > highScores) {
+    highScores.push(playerData);
+    console.log(highScores);
+  } else {
+    console.log("try again");
+    return;
+  }
   localStorage.setItem("playerData", JSON.stringify(playerData));
   //clear input 
   initialsInput.value = ' ';
