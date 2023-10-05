@@ -12,7 +12,7 @@ I have learnt about the ability to transverse the DOM to make changes. This was 
 - [Credits](#credits)
 
 ## Usage
-To use the password generator, go to this link: 
+To use the password generator, go to this link: https://create-88.github.io/code-quiz/ 
 
 ![code-quiz home screen](assets/images/Home%20screen%20code-quiz.PNG)
 ![code-quiz question screen](assets/images/Question%20screen%20code-quiz.PNG)
