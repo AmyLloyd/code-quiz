@@ -86,6 +86,7 @@ function renderQuestion() {
   choice2.textContent = currentQuestion.choices[1];
   choice3.textContent = currentQuestion.choices[2];
   choice4.textContent = currentQuestion.choices[3];
+ 
 }
 
 //Create variable to collect score starting at zero
@@ -94,14 +95,25 @@ var score = 0;
 //add event listener to activate choices
 choices.addEventListener("click", function (event) {
   var guess = event.target.textContent;
+
   if (guess === questions[currentQuestionIndex].answer) {
      console.log("CORRECT!") 
      score ++;
      console.log(score);
-     answerTextEl.textContent = "CORRECT!"
+   
+     answerTextEl.textContent = "CORRECT!";
+     setTimeout(clearMessage, 500);
+     function clearMessage() {
+     answerTextEl.textContent = "  ";
+     }    
+
   } else {
       console.log("WRONG!!!");
-      answerTextEl.textContent = "WRONG!"
+      answerTextEl.textContent = "WRONG!";
+      setTimeout(clearMessage, 500);
+      function clearMessage() {
+      answerTextEl.textContent = "  ";
+      }
       if (secondsLeft > 10) {
       secondsLeft = secondsLeft - 10;
       }
@@ -109,6 +121,7 @@ choices.addEventListener("click", function (event) {
   //Add less than length to ensure it knows what to do if index runs out
   currentQuestionIndex++;      
   if (currentQuestionIndex < questions.length) {
+  
   renderQuestion();
   } else {
   gameOver ();
