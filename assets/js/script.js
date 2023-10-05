@@ -157,11 +157,16 @@ function storeHighScore() {
   playerData.initials = playerInitials;
   playerData.score = score;  
 
-  if (highScores !== null && playerData.score > highScores) {
-    highScores.push(playerData);
+  if (playerData.score > highScores) {
+    highScores.push(playerData.score);
     console.log(highScores);
+    console.log("High score" + highScores);
   } else {
     console.log("try again");
+    var sendMessageTag = document.createElement("li");
+    sendMessageTag.textContent = "No high score. Refresh to try again."
+    var scoreBoard = document.getElementById("high-scores");
+    scoreBoard.appendChild(sendMessageTag);
     return;
   }
   localStorage.setItem("playerData", JSON.stringify(playerData));
